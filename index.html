@@ -7,212 +7,509 @@
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Cairo', sans-serif;
-        }
+      * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
 
-        body {
-            background: linear-gradient(135deg, #00294f, #0099ff);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            direction: rtl;
-            padding: 20px;
-        }
+      body {
+          background: linear-gradient(135deg, #00294f, #0099ff);
+          min-height: 100vh;
+          direction: rtl;
+          padding: 0;
+          display: flex;
+          flex-direction: column;
+      }
 
-        .container {
-            background: #ffffff;
-            width: 100%;
-            max-width: 900px;
-            border-radius: 10px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
-            padding: 30px;
-            overflow-y: auto;
-            max-height: 95vh;
-        }
+      .container {
+          background: linear-gradient(135deg, #00294f, #0099ff);
+          width: 100%;
+          max-width: 100%;
+          border-radius: 0;
+          box-shadow: none;
+          padding: 20px;
+          flex: 1;
+          overflow-y: auto;
+          margin: 0 auto;
+          display: flex;
+          flex-direction: column;
+      }
 
-        .header {
-            text-align: center;
-            padding-bottom: 20px;
-            border-bottom: 5px solid #034994;
-        }
+      .header {
+          text-align: center;
+          padding-bottom: 20px;
+          border-bottom: 5px solid #ffffff;
+          margin-bottom: 20px;
+      }
 
-        .header h1 {
-            font-size: 35px;
-            color: #034994;
-            font-weight: 700;
-        }
+      .header h1 {
+          font-size: clamp(24px, 5vw, 35px);
+          color: #ffffff;
+          font-weight: 700;
+          padding: 0 10px;
+      }
 
-        .search-container {
-            margin: 25px 0;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
+      .search-container {
+          margin: 20px 0;
+          display: flex;
+          flex-direction: column;
+          gap: 15px;
+      }
 
-        .search-box {
-            display: flex;
-            gap: 20px;
-            align-items: center;
-        }
+      .search-box {
+          display: flex;
+          gap: 15px;
+          align-items: center;
+          flex-wrap: wrap;
+      }
 
-        .search-input, .surah-select, .ayah-input {
-            padding: 12px 15px;
-            border: 3px solid #034994;
-            border-radius: 10px;
-            font-size: 16px;
-            background: #ffffff;
-            transition: border-color 0.3s;
-            width: 100%;
-        }
+      .search-input, .surah-select, .ayah-input {
+          padding: 12px 15px;
+          border: 0px solid #ffffff;
+          border-radius: 10px;
+          font-size: clamp(14px, 3vw, 16px);
+          background: #ffffff;
+          transition: all 0.3s;
+          flex: 1;
+          min-width: 120px;
+      }
 
-        .search-input:focus, .surah-select:focus, .ayah-input:focus {
-            border-color: #00695c;
-            border: 3px solid #034994;
-            outline: none;
-        }
+      .ayah-input {
+          max-width: 120px;
+      }
 
-        .ayah-input {
-            width: 120px;
-        }
+      .search-input:focus, .surah-select:focus, .ayah-input:focus {
+          border-color: #ffffff;
+          outline: none;
+          transform: scale(1.02);
+      }
 
-        .search-btn {
-            background: #034994;
-            color: #fff;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background 0.3s;
-        }
+      .search-btn {
+          background: #1ac100;
+          color: #000000;
+          border: none;
+          padding: 12px 20px;
+          border-radius: 10px;
+          cursor: pointer;
+          font-size: 5rem;
+          font-size: clamp(14px, 3vw, 16px);
+          transition: all 0.3s;
+          flex-shrink: 0;
+      }
 
-        .search-btn:hover {
-            background: #0879f1;
-        }
+      .search-btn:hover {
+          background: #00ff08;
+          transform: translateY(-2px);
+      }
 
-        .result-container {
-            background: #f5f5f5;
-            padding: 20px;
-            border-radius: 15px;
-            display: none;
-        }
+      .default-message {
+    text-align: center;
+    padding: 30px;
+    color: #fff;
+    font-size: clamp(18px, 4vw, 22px);
+    display: block;
+    position: relative;
+    background: rgba(15, 10, 30, 0.9);
+    border-radius: 16px;
+    margin: 25px 0;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    animation: 
+        vrFloat 7s ease-in-out infinite,
+        colorCycle 21s linear infinite;
+    transform-style: preserve-3d;
+    perspective: 1200px;
+    z-index: 1;
+    backdrop-filter: blur(8px);
+    box-shadow: 
+        0 0 25px rgba(0, 255, 255, 0.3),
+        0 0 50px rgba(255, 0, 255, 0.2);
+}
 
-        .result-container.active {
-            display: block;
-        }
+.default-message::before {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: -50%;
+    width: 200%;
+    height: 300%;
+    background: 
+        radial-gradient(circle at 70% 20%, #00ffff 0%, transparent 25%),
+        radial-gradient(circle at 30% 50%, #ff00ff 0%, transparent 30%),
+        radial-gradient(circle at 60% 80%, #ffff00 0%, transparent 35%),
+        radial-gradient(circle at 20% 70%, #00ff95 0%, transparent 40%);
+    animation: 
+        liquidFlow 25s linear infinite,
+        bubblePulse 9s ease infinite alternate;
+    z-index: -1;
+    opacity: 0.5;
+    filter: blur(25px);
+    mix-blend-mode: screen;
+}
 
-        .ayah-text {
-            font-size: 24px;
-            line-height: 2;
-            color: #ffffff;
-            text-align: justify;
-            padding: 15px;
-            background: #055aa5;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
+.default-message::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    padding: 2px;
+    background: linear-gradient(
+        135deg,
+        #00ffff,
+        #ff00ff,
+        #ffff00,
+        #00ff95,
+        #000000,
+        #ff0000,
+        #0015ff,
+        #00ffff,
+        #ae006b,
+        #f6ff00
+    );
+    background-size: 400% 400%;
+    -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: borderFlow 18s linear infinite;
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.7;
+    filter: blur(1px);
+}
 
-        .tafsir-title {
-            font-size: 22px;
-            color: #055aa5;
-            margin-bottom: 15px;
-        }
+@keyframes vrFloat {
+    0%, 100% { transform: translateY(0) rotateX(0) rotateY(0) scale(1); }
+    20% { transform: translateY(-8px) rotateX(5deg) rotateY(2deg) scale(1.02); }
+    40% { transform: translateY(5px) rotateX(-3deg) rotateY(4deg) scale(0.98); }
+    60% { transform: translateY(-4px) rotateX(2deg) rotateY(-3deg) scale(1.01); }
+    80% { transform: translateY(3px) rotateX(-1deg) rotateY(5deg) scale(0.99); }
+}
 
-        .tafsir-text {
-            font-size: 18px;
-            line-height: 1.8;
-            color:  #034994;
-            text-align: justify;
-        }
+@keyframes liquidFlow {
+    0% { transform: translateY(-50%) translateX(0) rotate(0deg); }
+    50% { transform: translateY(20%) translateX(50px) rotate(180deg); }
+    100% { transform: translateY(-50%) translateX(0) rotate(360deg); }
+}
 
-        .error-message {
-            color: #d32f2f;
-            font-size: 18px;
-            text-align: center;
-            margin-top: 20px;
-        }
+@keyframes bubblePulse {
+    0% { transform: scale(1); opacity: 0.4; }
+    50% { transform: scale(1.2); opacity: 0.7; }
+    100% { transform: scale(1); opacity: 0.4; }
+}
 
-        .loading-spinner {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            border: 8px solid #f3f3f3;
-            border-top: 8px solid #00695c;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-            display: none;
-        }
+@keyframes borderFlow {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 400% 50%; }
+}
 
-        @keyframes spin {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
-        }
+@keyframes colorCycle {
+    0% { box-shadow: 0 0 25px #00ffff, 0 0 50px rgba(255, 0, 255, 0.2); }
+    20% { box-shadow: 0 0 25px #ff00ff, 0 0 50px rgba(255, 255, 0, 0.2); }
+    40% { box-shadow: 0 0 25px #ffff00, 0 0 50px rgba(0, 255, 149, 0.2); }
+    60% { box-shadow: 0 0 25px #00ff95, 0 0 50px rgba(0, 21, 255, 0.2); }
+    80% { box-shadow: 0 0 25px #0015ff, 0 0 50px rgba(174, 0, 107, 0.2); }
+    100% { box-shadow: 0 0 25px #00ffff, 0 0 50px rgba(255, 0, 255, 0.2); }
+}
 
-        @media (max-width: 600px) {
-            .container {
-                padding: 20px;
-                max-width: 100%;
-            }
+.default-message span {
+    display: inline-block;
+    position: relative;
+    animation: 
+        hologramGlow 4s ease infinite alternate,
+        textDistort 6s ease infinite;
+    text-shadow: 
+        0 0 10px rgba(0, 255, 255, 0.8),
+        0 0 20px rgba(255, 0, 255, 0.6);
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
 
-            .header h1 {
-                font-size: 28px;
-            }
+@keyframes hologramGlow {
+    0% { 
+        text-shadow: 
+            0 0 10px #00ffff,
+            0 0 20px rgba(255, 0, 255, 0.6);
+    }
+    25% { 
+        text-shadow: 
+            0 0 15px #ff00ff,
+            0 0 30px rgba(255, 255, 0, 0.6);
+    }
+    50% { 
+        text-shadow: 
+            0 0 15px #ffff00,
+            0 0 30px rgba(0, 255, 149, 0.6);
+    }
+    75% { 
+        text-shadow: 
+            0 0 15px #00ff95,
+            0 0 30px rgba(0, 21, 255, 0.6);
+    }
+    100% { 
+        text-shadow: 
+            0 0 10px #00ffff,
+            0 0 20px rgba(255, 0, 255, 0.6);
+    }
+}
 
-            .search-box {
-                flex-direction: column;
-            }
+@keyframes textDistort {
+    0%, 100% { transform: skewX(0) scaleY(1); }
+    25% { transform: skewX(-3deg) scaleY(1.02); }
+    50% { transform: skewX(2deg) scaleY(0.98); }
+    75% { transform: skewX(3deg) scaleY(1.01); }
+}
+      .result-container {
+          background: #f5f5f5;
+          padding: 20px;
+          border-radius: 15px;
+          display: none;
+          margin-top: 20px;
+          animation: fadeIn 0.2s ease;
+      }
 
-            .search-input, .surah-select, .ayah-input {
-                font-size: 14px;
-            }
+      @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
+      }
 
-            .search-btn {
-                padding: 10px 15px;
-                font-size: 14px;
-            }
+      .result-container.active {
+          display: block;
+      }
 
-            .ayah-text {
-                font-size: 20px;
-            }
+      .ayah-text {
+          font-size: clamp(18px, 4vw, 24px);
+          line-height: 1.8;
+          color: #ffffff;
+          text-align: justify;
+          padding: 15px;
+          background: #055aa5;
+          border-radius: 10px;
+          margin-bottom: 20px;
+          position: relative;
+          overflow: hidden;
+      }
 
-            .tafsir-text {
-                font-size: 16px;
-            }
-        }
-    </style>
+      .ayah-text::before {
+    content: "\"";  /* استخدام رمز الاقتباس بشكل صحيح */
+    position: absolute;
+    top: 5px;
+    right: 15px;
+    font-size: 60px;
+    color: rgba(255, 255, 255, 0.1);
+    font-family: serif;
+}
+
+      .tafsir-title {
+          font-size: clamp(18px, 4vw, 22px);
+          color: #055aa5;
+          margin-bottom: 15px;
+          padding-right: 10px;
+          border-right: 4px solid #055aa5;
+      }
+
+      .tafsir-text {
+          font-size: clamp(16px, 3vw, 18px);
+          line-height: 1.7;
+          color: #034994;
+          text-align: justify;
+          padding: 0 5px;
+      }
+
+      .error-message {
+          color: #d32f2f;
+          font-size: clamp(16px, 3vw, 18px);
+          text-align: center;
+          margin-top: 20px;
+          padding: 10px;
+          background: rgba(211, 47, 47, 0.1);
+          border-radius: 8px;
+          display: none;
+      }
+
+      .loading-spinner {
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          border: 8px solid #f3f3f3;
+          border-top: 8px solid #00695c;
+          border-radius: 50%;
+          width: 50px;
+          height: 50px;
+          animation: spin 1s linear infinite;
+          display: none;
+          z-index: 100;
+      }
+
+      @keyframes spin {
+          0% { transform: translate(-50%, -50%) rotate(0deg); }
+          100% { transform: translate(-50%, -50%) rotate(360deg); }
+      }
+
+      .footer {
+          background: rgba(0, 0, 0, 0.3);
+          backdrop-filter: blur(8px);
+          border-radius: 0;
+          padding: 15px;
+          border: none;
+          border-top: 1px solid rgba(255, 255, 255, 0.15);
+          box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
+          margin: 0;
+          width: 100%;
+          text-align: center;
+          position: relative;
+          overflow: hidden;
+      }
+
+      .footer::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(45deg, transparent 65%, rgba(0, 255, 255, 0.05) 100%);
+          pointer-events: none;
+      }
+
+      .footer-title {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          margin-bottom: 8px;
+      }
+
+      .footer-title span {
+          font-size: clamp(18px, 4vw, 24px);
+          color: #FFD700;
+      }
+
+      .footer-title p {
+          font-size: clamp(16px, 3vw, 20px);
+          color: #ffffff;
+          font-weight: bold;
+          margin: 0;
+      }
+
+      .footer-divider {
+          height: 2px;
+          background: linear-gradient(90deg, transparent, #FFD700, #7FDBFF, #FFD700, transparent);
+          margin: 8px auto;
+          width: 80%;
+          max-width: 400px;
+      }
+
+      .footer-name {
+          font-size: clamp(16px, 3vw, 20px);
+          font-weight: bold;
+          color: #FFD700;
+          text-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
+      }
+
+      .color-dots {
+          display: flex;
+          justify-content: center;
+          margin-top: 10px;
+          gap: 8px;
+          flex-wrap: wrap;
+      }
+
+      .color-dot {
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          box-shadow: 0 0 5px;
+      }
+
+      @media (max-width: 600px) {
+          .search-box {
+              flex-direction: row;
+              justify-content: center;
+          }
+          
+          .ayah-input {
+              max-width: 80px;
+          }
+          
+          .search-btn {
+              width: 100%;
+          }
+      }
+
+      @media (min-width: 900px) {
+          .container {
+              max-width: 900px;
+              border-radius: 10px;
+              margin: 20px auto;
+              box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+          }
+          
+          .footer {
+              border-radius: 0 0 10px 10px;
+              max-width: 900px;
+              margin: 0 auto 20px;
+          }
+      }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>🔵 تطبيق تفسير القرآن الكريم 🔵</h1>
-        </div>
-        <div class="search-container">
-            <div class="search-box">
-                <select class="surah-select" id="surah-select">
-                    <option value="">إختر السورة</option>
-                </select>
-                <input type="number" class="ayah-input" id="ayah-number" placeholder="رقم الآية" min="1">
-                <button class="search-btn" onclick="searchAyah()">إبحث</button>
-            </div>
-            <input type="text" class="search-input" id="ayah-text-search" placeholder="أو أدخل نص الآية للبحـث .......  ">
-        </div>
-        <div class="result-container" id="result-container">
-            <div class="ayah-text" id="ayah-text"></div>
-            <h3 class="tafsir-title">التفسير</h3>
-            <p class="tafsir-text" id="tafsir-text"></p>
-        </div>
-        <div class="error-message" id="error-message"></div>
-        <div class="loading-spinner" id="loading-spinner"></div>
+  <div class="container">
+    <div class="header">
+        <h1>⚪ تطبيق تفسير القرآن الكريم ⚪</h1>
     </div>
+    <div class="search-container">
+        <div class="search-box">
+            <select class="surah-select" id="surah-select">
+                <option value="">إختر السورة</option>
+            </select>
+            <input type="number" class="ayah-input" id="ayah-number" placeholder="رقم الآية" min="1">
+            <button class="search-btn" id="search-btn">إبحث</button>
+        </div>
+        <input type="text" class="search-input" id="ayah-text-search" placeholder="أو أدخل نص الآية للبحـث .......  ">
+    </div>
+    
+    <div class="default-message" id="default-message">
+        ✨الرجاء اختيار سورة ورقم آية أو كتابة نص للبحث✨
+    </div>
+    
+    <div class="result-container" id="result-container">
+        <div class="ayah-text" id="ayah-text"></div>
+        <h3 class="tafsir-title">التفسير</h3>
+        <p class="tafsir-text" id="tafsir-text"></p>
+    </div>
+    
+    <div class="error-message" id="error-message"></div>
+    <div class="loading-spinner" id="loading-spinner"></div>
+</div>
 
+<!-- تذييل الصفحة -->
+<div class="footer">
+    <div class="footer-title">
+        <span>✨</span>
+        <p>برمجة وتصميم</p>
+        <span>✨</span>
+    </div>
+    
+    <div class="footer-divider"></div>
+    
+    <div class="footer-name">المهندس / عبدالرحمن محمد كمال حمودة</div>
+    
+    <div class="color-dots">
+        <div class="color-dot" style="background:#ff0000;"></div>
+        <div class="color-dot" style="background: #FFDC00;"></div>
+        <div class="color-dot" style="background: #2ECC40;"></div>
+        <div class="color-dot" style="background: #0074D9;"></div>
+        <div class="color-dot" style="background: #B10DC9;"></div>
+        <div class="color-dot" style="background: #00ffd5;"></div>
+        <div class="color-dot" style="background: #ffffff;"></div>
+        <div class="color-dot" style="background: #000000;"></div>
+    </div>
+</div>
     <script>
         const surahNames = [
             "الفاتحة", "البقرة", "ال عمران", "النساء", "المائدة", "الانعام", "الاعراف", "الانفال", "التوبة",
@@ -25943,125 +26240,140 @@
 
 
  // تحميل قائمة السور
- async function loadSurahs() {
-            try {
-                const response = await fetch('https://api.alquran.cloud/v1/quran/ar');
-                const data = await response.json();
-                surahsData = data.data.surahs;
-                populateSurahSelect();
-            } catch (error) {
-                console.error('Error fetching surahs:', error);
-                document.getElementById('error-message').textContent = 'خطأ في جلب السور، تحقق من الاتصال بالإنترنت.';
-            }
-        }
+async function loadSurahs() {
+    try {
+        const response = await fetch('https://api.alquran.cloud/v1/quran/ar.alafasy');
+        const data = await response.json();
+        window.surahsData = data.data.surahs;
+        populateSurahSelect();
+    } catch (error) {
+        console.error('Error fetching surahs:', error);
+        document.getElementById('error-message').textContent = 'خطأ في جلب السور، تحقق من الاتصال بالإنترنت.';
+        document.getElementById('error-message').style.display = 'block';
+    }
+}
 
-        // ملء قائمة السور
-        function populateSurahSelect() {
-            const surahSelect = document.getElementById('surah-select');
-            surahsData.forEach((surah, index) => {
-                const option = document.createElement('option');
-                option.value = surah.number;
-                option.textContent = `${surahNames[index]} (${surah.ayahs.length} آية)`;
-                surahSelect.appendChild(option);
-            });
-        }
+// ملء قائمة السور
+function populateSurahSelect() {
+    const surahSelect = document.getElementById('surah-select');
+    surahSelect.innerHTML = '<option value="">إختر السورة</option>';
+    
+    if (window.surahsData) {
+        window.surahsData.forEach((surah, index) => {
+            const option = document.createElement('option');
+            option.value = surah.number;
+            option.textContent = `${surahNames[index] || `سورة ${surah.number}`} (${surah.ayahs.length} آية)`;
+            surahSelect.appendChild(option);
+        });
+    }
+}
 
-        // البحث عن الآية
-        async function searchAyah() {
-            const surahNumber = document.getElementById('surah-select').value;
-            const ayahNumber = document.getElementById('ayah-number').value.trim();
-            const ayahTextSearch = document.getElementById('ayah-text-search').value.trim();
-            const resultContainer = document.getElementById('result-container');
-            const ayahTextElement = document.getElementById('ayah-text');
-            const tafsirTextElement = document.getElementById('tafsir-text');
-            const errorMessage = document.getElementById('error-message');
-            const spinner = document.getElementById('loading-spinner');
+// البحث عن الآية
+async function searchAyah() {
+    const surahNumber = parseInt(document.getElementById('surah-select').value);
+    const ayahNumber = parseInt(document.getElementById('ayah-number').value.trim());
+    const ayahTextSearch = document.getElementById('ayah-text-search').value.trim();
+    const resultContainer = document.getElementById('result-container');
+    const ayahTextElement = document.getElementById('ayah-text');
+    const tafsirTextElement = document.getElementById('tafsir-text');
+    const errorMessage = document.getElementById('error-message');
+    const spinner = document.getElementById('loading-spinner');
+    const defaultMessage = document.getElementById('default-message');
 
-            resultContainer.classList.remove('active');
-            errorMessage.textContent = '';
-            spinner.style.display = 'block';
+    resultContainer.classList.remove('active');
+    errorMessage.style.display = 'none';
+    defaultMessage.style.display = 'none';
+    spinner.style.display = 'block';
 
-            if (!surahNumber && !ayahTextSearch) {
-                errorMessage.textContent = 'يرجى اختيار سورة أو إدخال نص الآية.';
-                spinner.style.display = 'none';
-                return;
-            }
-
-            try {
-                if (surahNumber && ayahNumber) {
-                    // البحث برقم السورة والآية
-                    const surah = surahsData.find(s => s.number === parseInt(surahNumber));
-                    if (!surah) {
-                        errorMessage.textContent = 'السورة غير موجودة.';
-                        spinner.style.display = 'none';
-                        return;
-                    }
-                    
-                    if (surah.number === 1 && ayahNumber >= 1 && ayahNumber <= 7) {
-                        // استخدام تفسير الفاتحة المدمج
-                        const ayahKey = `1:${ayahNumber}`;
-                        const ayahData = tafsirData[ayahKey];
-                        
-                        ayahTextElement.textContent = ayahData.text;
-                        tafsirTextElement.textContent = ayahData.tafsir;
-                        resultContainer.classList.add('active');
-                    } else {
-                        // البحث في API للآيات الأخرى
-                        const ayah = surah.ayahs[ayahNumber - 1];
-                        if (!ayah) {
-                            errorMessage.textContent = 'رقم الآية غير صحيح.';
-                            spinner.style.display = 'none';
-                            return;
-                        }
-                        const ayahText = ayah.text;
-                        const tafsirKey = `${surahNumber}:${ayahNumber}`;
-                        const tafsir = tafsirData[tafsirKey] ? tafsirData[tafsirKey].tafsir : "التفسير غير متاح حاليًا لهذه الآية.";
-
-                        ayahTextElement.textContent = ayahText;
-                        tafsirTextElement.textContent = tafsir;
-                        resultContainer.classList.add('active');
-                    }
-                } else if (ayahTextSearch) {
-                    // البحث بنص الآية
-                    let found = false;
-                    for (const surah of surahsData) {
-                        for (const ayah of surah.ayahs) {
-                            if (removeTashkeel(ayah.text).includes(removeTashkeel(ayahTextSearch))) {
-                                const tafsirKey = `${surah.number}:${ayah.numberInSurah}`;
-                                const tafsir = tafsirData[tafsirKey] ? tafsirData[tafsirKey].tafsir : "التفسير غير متاح حاليًا لهذه الآية.";
-                                ayahTextElement.textContent = ayah.text;
-                                tafsirTextElement.textContent = tafsir;
-                                resultContainer.classList.add('active');
-                                found = true;
-                                break;
-                            }
-                        }
-                        if (found) break;
-                    }
-                    if (!found) {
-                        errorMessage.textContent = 'لم يتم العثور على الآية.';
-                    }
+    try {
+        if ((surahNumber && ayahNumber) || ayahTextSearch) {
+            if (surahNumber && ayahNumber) {
+                // البحث برقم السورة والآية
+                const surah = window.surahsData.find(s => s.number === surahNumber);
+                if (!surah) {
+                    throw new Error('السورة غير موجودة');
                 }
-            } catch (error) {
-                console.error('Error searching ayah:', error);
-                errorMessage.textContent = 'حدث خطأ أثناء البحث.';
-            } finally {
-                spinner.style.display = 'none';
+                
+                const ayah = surah.ayahs[ayahNumber - 1];
+                if (!ayah) {
+                    throw new Error('رقم الآية غير صحيح');
+                }
+                
+                const ayahKey = `${surahNumber}:${ayahNumber}`;
+                const ayahData = tafsirData[ayahKey] || {
+                    text: ayah.text,
+                    tafsir: "التفسير غير متاح حاليًا لهذه الآية."
+                };
+                
+                ayahTextElement.textContent = ayahData.text;
+                tafsirTextElement.textContent = ayahData.tafsir;
+                resultContainer.classList.add('active');
+            } else if (ayahTextSearch) {
+                // البحث بنص الآية
+                let found = false;
+                for (const surah of window.surahsData) {
+                    for (const ayah of surah.ayahs) {
+                        if (removeTashkeel(ayah.text).includes(removeTashkeel(ayahTextSearch))) {
+                            const ayahKey = `${surah.number}:${ayah.numberInSurah}`;
+                            const ayahData = tafsirData[ayahKey] || {
+                                text: ayah.text,
+                                tafsir: "التفسير غير متاح حاليًا لهذه الآية."
+                            };
+                            
+                            ayahTextElement.textContent = ayahData.text;
+                            tafsirTextElement.textContent = ayahData.tafsir;
+                            resultContainer.classList.add('active');
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (found) break;
+                }
+                
+                if (!found) {
+                    throw new Error('لم يتم العثور على الآية');
+                }
             }
+        } else {
+            throw new Error('يرجى اختيار سورة ورقم آية أو إدخال نص للبحث');
         }
+    } catch (error) {
+        errorMessage.textContent = error.message;
+        errorMessage.style.display = 'block';
+        defaultMessage.style.display = 'block';
+    } finally {
+        spinner.style.display = 'none';
+    }
+}
 
-        // إزالة التشكيل للبحث
-        function removeTashkeel(text) {
-            return text.replace(/[\u064B-\u065F\u0610-\u061A]/g, '');
-        }
+// إزالة التشكيل للبحث
+function removeTashkeel(text) {
+    return text.replace(/[\u064B-\u065F\u0610-\u061A]/g, '');
+}
 
-        // تحميل السور عند فتح الصفحة
-        window.onload = function() {
-            loadSurahs();
-            document.getElementById('ayah-text-search').addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') searchAyah();
-            });
-        };
+// تحميل السور عند فتح الصفحة
+window.onload = function() {
+    loadSurahs();
+    
+    document.getElementById('search-btn').addEventListener('click', searchAyah);
+    
+    document.getElementById('ayah-text-search').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') searchAyah();
+    });
+    
+    document.getElementById('ayah-number').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') searchAyah();
+    });
+};
+
+
+
+
+
+
+
+
+        
     </script>
 </body>
 </html>
